@@ -34,7 +34,7 @@ export function ItemsGrid() {
       {characters.map((props) => (
         <MultCard
           key={props.id}
-          onClickHandler={handlersMap.get(props.id)} 
+          onClickHandler={handlersMap.get(props.id)}
           {...props}
         />
       ))}

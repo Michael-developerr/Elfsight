@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 import { useData } from './providers';
 import styled from 'styled-components';
+import { CustomSelect } from './CustomSelect';
 
 const statusOptions = ['Alive', 'Dead', 'unknown'];
 const genderOptions = ['Female', 'Male', 'Genderless', 'unknown'];
-
 const speciesOptions = [
   'Human',
   'Alien',
@@ -32,17 +32,17 @@ export function Filters() {
   );
 
   const onStatusChange = useCallback(
-    (e) => handleFilterChange('status', e.target.value),
+    (val) => handleFilterChange('status', val),
     [handleFilterChange]
   );
 
   const onGenderChange = useCallback(
-    (e) => handleFilterChange('gender', e.target.value),
+    (val) => handleFilterChange('gender', val),
     [handleFilterChange]
   );
 
   const onSpeciesChange = useCallback(
-    (e) => handleFilterChange('species', e.target.value),
+    (val) => handleFilterChange('species', val),
     [handleFilterChange]
   );
 
@@ -60,38 +60,30 @@ export function Filters() {
     <FiltersContainer>
       <TopFilters>
         <FilterGroup>
-          <Select value={filters.status} onChange={onStatusChange}>
-            <option value="" defaultChecked>
-              Status
-            </option>
-            {statusOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </Select>
+          <CustomSelect
+            value={filters.status}
+            onChange={onStatusChange}
+            options={statusOptions}
+            placeholder="Status"
+          />
         </FilterGroup>
 
         <FilterGroup>
-          <Select value={filters.gender} onChange={onGenderChange}>
-            <option value="">Gender</option>
-            {genderOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </Select>
+          <CustomSelect
+            value={filters.gender}
+            onChange={onGenderChange}
+            options={genderOptions}
+            placeholder="Gender"
+          />
         </FilterGroup>
 
         <FilterGroup>
-          <Select value={filters.species} onChange={onSpeciesChange}>
-            <option value="">Species</option>
-            {speciesOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </Select>
+          <CustomSelect
+            value={filters.species}
+            onChange={onSpeciesChange}
+            options={speciesOptions}
+            placeholder="Species"
+          />
         </FilterGroup>
       </TopFilters>
 
@@ -165,15 +157,6 @@ const FilterGroup = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-`;
-
-const Select = styled.select`
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #444;
-  background: #1a2639;
-  color: #fff;
-  width: 100%;
 `;
 
 const Input = styled.input`

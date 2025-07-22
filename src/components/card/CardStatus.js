@@ -1,4 +1,3 @@
-
 import styled from 'styled-components';
 
 export function CardStatus({ status, species, type, className }) {
